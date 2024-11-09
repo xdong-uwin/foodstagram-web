@@ -1,5 +1,6 @@
 import Link from "next/link";
 import {ReactNode} from "react";
+import {Button} from "@/components/button";
 
 function SidebarItem(props: { value: ReactNode }) {
     return (
@@ -20,10 +21,16 @@ export default function Sidebar() {
                 </div>
             </Link>
 
-            <nav className="space-y-6">
+            <nav className="space-y-7">
                 <SidebarItem value="Find" />
                 <SidebarItem value="Post" />
                 <SidebarItem value="Notification" />
+                <Button className="w-full bg-red-500 hover:bg-red-600 text-white">
+                    Sign in
+                </Button>
+                <Button className="w-full bg-red-500 hover:bg-red-600 text-white">
+                    Become a member
+                </Button>
             </nav>
         </aside>
     )
