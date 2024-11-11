@@ -3,6 +3,7 @@
 import Sidebar from "@/components/sidebar";
 import SearchBar from "@/components/search-bar";
 import Categories from "@/components/categories";
+import Recipes from "@/components/recipes";
 
 export default function FoodstagramIndex() {
     const categories = ["Low-fat", "High-protein", "Low-sugar", "Vitamin C", "Heart-friendly", "High-fiber"]
@@ -16,6 +17,7 @@ export default function FoodstagramIndex() {
                         <SearchBar/>
                         <Categories value={categories}/>
                     </div>
+                    <Recipes/>
                 </main>
             </div>
         </div>
