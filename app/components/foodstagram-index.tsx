@@ -1,12 +1,22 @@
 "use client"
+import useSWR from 'swr'
 
 import Sidebar from "@/components/sidebar";
 import SearchBar from "@/components/search-bar";
 import Categories from "@/components/categories";
 import Recipes from "@/components/recipes";
 
+type RecipeTag = {
+    name: string;
+};
+
+const fetcher = (...args: [RequestInfo, RequestInit?]): Promise<RecipeTag[]> =>
+    fetch(...args).then((res) => res.json());
+
 export default function FoodstagramIndex() {
-    const categories = ["Low-fat", "High-protein", "Low-sugar", "Vitamin C", "Heart-friendly", "High-fiber"]
+    const { data } = useSWR('http://localhost:8080/v1/configurations/recipe-tags', fetcher)
+
+    const categories = data ? data.map(recipeTag => recipeTag.name) : [];
 
     return (
         <div className="min-h-screen bg-gray-50">
