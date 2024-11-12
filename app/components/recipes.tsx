@@ -8,7 +8,7 @@ type Recipe = {
     imageUrl: string
     title: string
     description: string
-    authorId: string
+    author: string
 }
 
 const fetcher = (...args: [RequestInfo, RequestInit?]): Promise<Recipe[]> =>
@@ -21,7 +21,7 @@ export default function Recipes() {
         "image": recipe.imageUrl,
         "title": recipe.title,
         "description": recipe.description,
-        "authorId": recipe.authorId,
+        "author": recipe.author,
     })) : [];
 
     return (
@@ -40,7 +40,7 @@ export default function Recipes() {
                         <p className="text-lg mb-2 font-extrabold">{recipe.title}</p>
                         <p className="text-sm mb-2 line-clamp-2">{recipe.description}</p>
                         <div className="flex items-center justify-between">
-                            <span className="text-sm text-gray-500">{recipe.authorId}</span>
+                            <span className="text-sm text-gray-500">{recipe.author}</span>
                             <Button
                                 variant="ghost"
                                 size="sm"
