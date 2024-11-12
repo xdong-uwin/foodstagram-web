@@ -1,6 +1,7 @@
 import Link from "next/link";
 import {ReactNode} from "react";
 import {Button} from "@/components/button";
+import LoginModal from "@/components/login-modal";
 
 function SidebarItem(props: { value: ReactNode }) {
     return (
@@ -25,9 +26,8 @@ export default function Sidebar() {
                 <SidebarItem value="Find" />
                 <SidebarItem value="Post" />
                 <SidebarItem value="Notification" />
-                <Button className="w-full bg-red-500 hover:bg-red-600 text-white">
-                    Sign in
-                </Button>
+
+                <LoginModal/>
                 <Button className="w-full bg-red-500 hover:bg-red-600 text-white">
                     Become a member
                 </Button>
