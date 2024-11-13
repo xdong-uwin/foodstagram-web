@@ -1,7 +1,7 @@
 import Link from "next/link";
-import {ReactNode} from "react";
-import {Button} from "@/components/button";
+import {ReactNode, useState} from "react";
 import LoginModal from "@/components/login-modal";
+import RegisterModal from "@/components/resigter-modal";
 
 function SidebarItem(props: { value: ReactNode }) {
     return (
@@ -14,6 +14,9 @@ function SidebarItem(props: { value: ReactNode }) {
 }
 
 export default function Sidebar() {
+    const [isLoginOpen, setIsLoginOpen] = useState(false)
+    const [isRegisterOpen, setIsRegisterOpen] = useState(false)
+
     return (
         <aside className="w-64 p-6 bg-white border-r min-h-screen">
             <Link href="/" className="inline-block mb-8">
@@ -27,10 +30,8 @@ export default function Sidebar() {
                 <SidebarItem value="Post" />
                 <SidebarItem value="Notification" />
 
-                <LoginModal/>
-                <Button className="w-full bg-red-500 hover:bg-red-600 text-white">
-                    Become a member
-                </Button>
+                <LoginModal isLoginOpen={isLoginOpen} setIsLoginOpen={setIsLoginOpen} setIsRegisterOpen={setIsRegisterOpen}/>
+                <RegisterModal isRegisterOpen={isRegisterOpen} setIsRegisterOpen={setIsRegisterOpen} setIsLoginOpen={setIsLoginOpen}/>
             </nav>
         </aside>
     )
