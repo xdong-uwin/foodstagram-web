@@ -21,7 +21,7 @@ export default function RegisterModal(props: {
     const [isLoading, setIsLoading] = useState(false)
 
     const postRegisterData = async (data: { name: string; email: string; password: string }) => {
-        const response = await fetch('/api/register', {
+        const response = await fetch('http://localhost:8080/v1/members', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

@@ -11,12 +11,64 @@ import {
 } from "@/components/dialog"
 import {Input} from "@/components/input"
 import {Label} from "@/components/label"
+import React, {useEffect, useState} from "react";
+import { Alert, AlertDescription } from "@/components/alert";
 
 export default function LoginModal(props: {
     isLoginOpen: boolean,
     setIsLoginOpen: (arg: boolean) => void,
     setIsRegisterOpen: (arg: boolean) => void
 }) {
+    const [isLoading, setIsLoading] = useState(false)
+    const [errorMessage, setErrorMessage] = useState<string | null>(null)
+
+    useEffect(() => {
+        if (props.isLoginOpen) {
+            setErrorMessage(null)
+        }
+    }, [props.isLoginOpen])
+
+    const postLoginData = async (data: { email: string; password: string }) => {
+        const response = await fetch('http://localhost:8080/v1/members/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+        if (!response.ok) {
+            const errorData = await response.json()
+            console.log(errorData)
+            throw new Error(errorData.error || 'Login failed')
+        }
+        return response.json()
+    }
+
+    const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault()
+        setIsLoading(true)
+        setErrorMessage(null)
+        const form = event.currentTarget
+        const formData = new FormData(form)
+        const email = formData.get('email') as string
+        const password = formData.get('password') as string
+
+        try {
+            await postLoginData({email, password})
+            props.setIsLoginOpen(false)
+            // Show a success message?
+        } catch (error) {
+            if (error instanceof Error) {
+                setErrorMessage(error.message)
+            } else {
+                setErrorMessage('An unexpected error occurred')
+            }
+            // Display error message to user?
+        } finally {
+            setIsLoading(false)
+            // props.setIsLoginOpen(false);
+        }
+    }
 
     const handleSignOnClick = () => {
         props.setIsLoginOpen(false)
@@ -39,18 +91,25 @@ export default function LoginModal(props: {
                     </DialogDescription>
                 </DialogHeader>
 
-                <div className="grid gap-4 py-2">
+                <form onSubmit={handleLogin} className="grid gap-4 py-2">
+                    {errorMessage && (
+                        <Alert variant="destructive">
+                            <AlertDescription>{errorMessage}</AlertDescription>
+                        </Alert>
+                    )}
                     <div className="grid gap-2">
                         <Label htmlFor="email">Email</Label>
-                        <Input id="email" type="email" placeholder="Enter your email" className="border-gray-200" required/>
+                        <Input id="email" name="email" type="email" placeholder="Enter your email" className="border-gray-200"
+                               required/>
                     </div>
                     <div className="grid gap-2">
                         <Label htmlFor="password">Password</Label>
-                        <Input id="password" type="password" placeholder="Enter your password"
+                        <Input id="password" name="password" type="password" placeholder="Enter your password"
                                className="border-gray-200" required/>
                     </div>
-                    <Button className="w-full bg-red-500 hover:bg-red-600 text-white">
-                        Sign in
+                    <Button type="submit" className="w-full bg-red-500 hover:bg-red-600 text-white"
+                            disabled={isLoading}>
+                        {isLoading ? 'Signing in...' : 'Sign in'}
                     </Button>
 
                     <p className="text-center text-sm text-muted-foreground">
@@ -58,9 +117,8 @@ export default function LoginModal(props: {
                         <button type="button" onClick={handleSignOnClick} className="text-red-500 hover:underline">
                             Sign up
                         </button>
-
                     </p>
-                </div>
+                </form>
 
             </DialogContent>
         </Dialog>
