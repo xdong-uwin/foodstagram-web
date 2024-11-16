@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState } from "react"
-import { Button } from "@/components/button"
+import { Button } from "@/components/common/button"
 import {
     Dialog,
     DialogContent,
@@ -9,9 +9,9 @@ import {
     DialogHeader,
     DialogTitle,
     DialogTrigger,
-} from "@/components/dialog"
-import { Input } from "@/components/input"
-import { Label } from "@/components/label"
+} from "@/components/common/dialog"
+import { Input } from "@/components/common/input"
+import { Label } from "@/components/common/label"
 
 export default function RegisterModal(props: {
     isRegisterOpen: boolean,

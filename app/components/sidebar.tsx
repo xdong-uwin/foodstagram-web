@@ -1,7 +1,7 @@
 import Link from "next/link";
 import {ReactNode, useState} from "react";
-import LoginModal from "@/components/login-modal";
-import RegisterModal from "@/components/resigter-modal";
+import LoginModal from "@/components/modal/login-modal";
+import RegisterModal from "@/components/modal/resigter-modal";
 
 function SidebarItem(props: { value: ReactNode }) {
     return (

@@ -1,4 +1,4 @@
-import {Button} from "@/components/button";
+import {Button} from "@/components/common/button";
 import { Heart } from "lucide-react"
 import {Recipe, RecipeContent} from "@/components/recipe";
 import Image from "next/image"

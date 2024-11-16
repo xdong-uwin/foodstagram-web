@@ -1,6 +1,6 @@
 'use client'
 
-import {Button} from "@/components/button"
+import {Button} from "@/components/common/button"
 import {
     Dialog,
     DialogContent,
@@ -8,11 +8,11 @@ import {
     DialogHeader,
     DialogTitle,
     DialogTrigger,
-} from "@/components/dialog"
-import {Input} from "@/components/input"
-import {Label} from "@/components/label"
+} from "@/components/common/dialog"
+import {Input} from "@/components/common/input"
+import {Label} from "@/components/common/label"
 import React, {useEffect, useState} from "react";
-import { Alert, AlertDescription } from "@/components/alert";
+import { Alert, AlertDescription } from "@/components/common/alert";
 
 export default function LoginModal(props: {
     isLoginOpen: boolean,

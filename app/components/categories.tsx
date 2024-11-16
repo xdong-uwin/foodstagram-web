@@ -1,4 +1,4 @@
-import {Button} from "@/components/button";
+import {Button} from "@/components/common/button";
 
 export default function Categories(props: { value: string[] }) {
     return (
