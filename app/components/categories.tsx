@@ -1,6 +1,6 @@
 import {Button} from "@/components/common/button";
 
-export default function Categories(props: { value: string[], handleSearch: (keyword: string) => void } ) {
+export default function Categories(props: { value: string[], handleClick: (input: string) => void }) {
     return (
         <div className="flex gap-2 flex-wrap">
             {props.value.map((recipeTag) => (
@@ -8,7 +8,7 @@ export default function Categories(props: { value: string[], handleSearch: (keyw
                     key={recipeTag}
                     variant="outline"
                     className="rounded-full"
-                    onClick={() => props.handleSearch(recipeTag)}
+                    onClick={async () => props.handleClick(recipeTag)}
                 >
                     {recipeTag}
                 </Button>

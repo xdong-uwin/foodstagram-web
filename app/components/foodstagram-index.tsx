@@ -44,6 +44,20 @@ export default function FoodstagramIndex() {
         setSearchQuery(input);
     }
 
+    const handleClickCategory = async (category: string) => {
+        setSearchQuery(category);
+        try {
+            console.log(`Searching for ${category}`)
+            const results = await fetchRecipes(category)
+            console.log(results)
+            setRecipes(results)
+        } catch (error) {
+            console.error('Error during search:', error)
+        } finally {
+            setIsLoading(false)
+        }
+    }
+
     const handleSearch = async () => {
         setIsLoading(true)
         try {
@@ -68,7 +82,7 @@ export default function FoodstagramIndex() {
                 <main className="flex-1 p-6">
                     <div className="mb-8">
                         <SearchBar handleInput={handleInput} handleSearch={handleSearch} isLoading={isLoading}/>
-                        <Categories value={recipeTags} handleSearch={handleSearch} />
+                        <Categories value={recipeTags} handleClick={handleClickCategory} />
                     </div>
                     <Recipes recipes={recipes} />
                     {recipes.length === 0 && !isLoading && (
