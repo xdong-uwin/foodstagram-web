@@ -2,7 +2,6 @@ import {Button} from "@/components/common/button";
 import { Heart } from "lucide-react"
 import {Recipe, RecipeContent} from "@/components/recipe";
 import Image from "next/image"
-import useSWR from "swr";
 
 type Recipe = {
     imageUrl: string
@@ -11,18 +10,13 @@ type Recipe = {
     author: string
 }
 
-const fetcher = (...args: [RequestInfo, RequestInit?]): Promise<Recipe[]> =>
-    fetch(...args).then((res) => res.json());
-
-export default function Recipes() {
-    const { data } = useSWR('http://localhost:8080/v1/recipes', fetcher);
-
-    const recipes = data ? data.map(recipe => ({
+export default function Recipes(props: { recipes: Recipe[] }) {
+    const recipes = props.recipes.map(recipe => ({
         "image": recipe.imageUrl,
         "title": recipe.title,
         "description": recipe.description,
         "author": recipe.author,
-    })) : [];
+    }));
 
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
