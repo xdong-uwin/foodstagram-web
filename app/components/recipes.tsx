@@ -13,13 +13,14 @@ export default function Recipes(props: { recipes: RecipeDto[] }) {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
             {props.recipes.map((recipe, index) => (
                 <Recipe key={index}>
-                    <RecipeContent className="p-3" onClick={() => setIsDetailModalOpen(true)}>
+                    <RecipeContent className="p-3">
                         <div className="aspect-square relative mb-3">
                             <Image
                                 src={recipe.imageUrl}
                                 alt="Food post"
                                 fill
                                 className="object-cover rounded-lg"
+                                onClick={() => setIsDetailModalOpen(true)}
                             />
                         </div>
                         <p className="text-lg mb-2 font-extrabold">{recipe.title}</p>

@@ -80,7 +80,7 @@ export default function LoginModal(props: {
     return (
         <Dialog open={props.isLoginOpen} onOpenChange={props.setIsLoginOpen}>
             <DialogTrigger asChild>
-                <Button className="w-full bg-red-500 hover:bg-red-600 text-white">
+                <Button className="w-full bg-red-500 hover:bg-red-600 text-white justify-center">
                     Sign in
                 </Button>
             </DialogTrigger>

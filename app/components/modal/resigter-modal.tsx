@@ -65,7 +65,7 @@ export default function RegisterModal(props: {
         <>
             <Dialog open={props.isRegisterOpen} onOpenChange={props.setIsRegisterOpen}>
                 <DialogTrigger asChild>
-                    <Button className="w-full bg-red-500 hover:bg-red-600 text-white">
+                    <Button className="w-full bg-red-500 hover:bg-red-600 text-white justify-center">
                         Become a member
                     </Button>
                 </DialogTrigger>

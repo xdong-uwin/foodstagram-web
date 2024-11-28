@@ -7,9 +7,11 @@ import {Button} from "@/components/common/button";
 function SidebarItem(props: { value: ReactNode }) {
     return (
         <div>
-            <h2 className="text-xl font-semibold mb-2">
-                {props.value}
-            </h2>
+            <Button className="w-full text-left justify-left">
+                <h2 className="text-xl font-semibold mb-2">
+                    {props.value}
+                </h2>
+            </Button>
         </div>
     )
 }
