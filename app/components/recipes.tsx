@@ -2,30 +2,21 @@ import {Button} from "@/components/common/button";
 import { Heart } from "lucide-react"
 import {Recipe, RecipeContent} from "@/components/recipe";
 import Image from "next/image"
+import React from "react";
+import {RecipeDetailModal} from "@/components/modal/recipe-detail-modal";
+import {Recipe as RecipeDto} from "@/types/recipe";
 
-type Recipe = {
-    imageUrl: string
-    title: string
-    description: string
-    author: string
-}
-
-export default function Recipes(props: { recipes: Recipe[] }) {
-    const recipes = props.recipes.map(recipe => ({
-        "image": recipe.imageUrl,
-        "title": recipe.title,
-        "description": recipe.description,
-        "author": recipe.author,
-    }));
+export default function Recipes(props: { recipes: RecipeDto[] }) {
+    const [isDetailModalOpen, setIsDetailModalOpen] = React.useState(false)
 
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
-            {recipes.map((recipe, index) => (
+            {props.recipes.map((recipe, index) => (
                 <Recipe key={index}>
-                    <RecipeContent className="p-3">
+                    <RecipeContent className="p-3" onClick={() => setIsDetailModalOpen(true)}>
                         <div className="aspect-square relative mb-3">
                             <Image
-                                src={recipe.image}
+                                src={recipe.imageUrl}
                                 alt="Food post"
                                 fill
                                 className="object-cover rounded-lg"
@@ -45,7 +36,13 @@ export default function Recipes(props: { recipes: Recipe[] }) {
                             </Button>
                         </div>
                     </RecipeContent>
+                    <RecipeDetailModal
+                        recipe={recipe}
+                        open={isDetailModalOpen}
+                        onOpenChange={setIsDetailModalOpen}
+                    />
                 </Recipe>
+
             ))}
         </div>
     )

@@ -6,17 +6,11 @@ import SearchBar from "@/components/search-bar";
 import Categories from "@/components/categories";
 import Recipes from "@/components/recipes";
 import {useState} from "react";
+import {Recipe} from "@/types/recipe";
 
 type RecipeTag = {
     name: string;
 };
-
-type Recipe = {
-    imageUrl: string
-    title: string
-    description: string
-    author: string
-}
 
 const fetchRecipes = async (query: string): Promise<Recipe[]> => {
     try {
@@ -24,6 +18,7 @@ const fetchRecipes = async (query: string): Promise<Recipe[]> => {
         if (!response.ok) {
             throw new Error('Failed to fetch recipes')
         }
+        console.log(response)
         return await response.json()
     } catch (error) {
         console.error('Error fetching recipes:', error)
