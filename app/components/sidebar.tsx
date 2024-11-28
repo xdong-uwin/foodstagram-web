@@ -26,7 +26,7 @@ export default function Sidebar() {
             </Link>
 
             <nav className="space-y-7">
-                <SidebarItem value="Find" />
+                <SidebarItem value="Favourite" />
                 <SidebarItem value="Post" />
                 <SidebarItem value="Notification" />
 
