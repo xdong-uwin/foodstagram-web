@@ -59,6 +59,7 @@ export default function FoodstagramIndex() {
     }
 
     const handleSearch = async () => {
+        setSearchQuery(searchQuery)
         setIsLoading(true)
         try {
             console.log(`Searching for ${searchQuery}`)
@@ -81,7 +82,7 @@ export default function FoodstagramIndex() {
                 <Sidebar/>
                 <main className="flex-1 p-6">
                     <div className="mb-8">
-                        <SearchBar handleInput={handleInput} handleSearch={handleSearch} isLoading={isLoading}/>
+                        <SearchBar display={searchQuery} handleInput={handleInput} handleSearch={handleSearch} isLoading={isLoading}/>
                         <Categories value={recipeTags} handleClick={handleClickCategory} />
                     </div>
                     <Recipes recipes={recipes} />
