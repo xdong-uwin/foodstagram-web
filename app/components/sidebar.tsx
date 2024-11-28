@@ -1,7 +1,8 @@
 import Link from "next/link";
-import {ReactNode, useState} from "react";
+import React, {ReactNode, useState} from "react";
 import LoginModal from "@/components/modal/login-modal";
 import RegisterModal from "@/components/modal/resigter-modal";
+import {Button} from "@/components/common/button";
 
 function SidebarItem(props: { value: ReactNode }) {
     return (
@@ -16,6 +17,11 @@ function SidebarItem(props: { value: ReactNode }) {
 export default function Sidebar() {
     const [isLoginOpen, setIsLoginOpen] = useState(false)
     const [isRegisterOpen, setIsRegisterOpen] = useState(false)
+    const [isLogged, setIsLogged] = useState(false)
+
+    const handleLogoutClick = () => {
+        setIsLogged(false)
+    }
 
     return (
         <aside className="w-64 p-6 bg-white border-r min-h-screen">
@@ -26,12 +32,24 @@ export default function Sidebar() {
             </Link>
 
             <nav className="space-y-7">
-                <SidebarItem value="Favourite" />
-                <SidebarItem value="Post" />
-                <SidebarItem value="Notification" />
+                <SidebarItem value="Favourite"/>
+                <SidebarItem value="Post"/>
+                <SidebarItem value="Notification"/>
 
-                <LoginModal isLoginOpen={isLoginOpen} setIsLoginOpen={setIsLoginOpen} setIsRegisterOpen={setIsRegisterOpen}/>
-                <RegisterModal isRegisterOpen={isRegisterOpen} setIsRegisterOpen={setIsRegisterOpen} setIsLoginOpen={setIsLoginOpen}/>
+                {isLogged ? (
+                    <Button className="w-full bg-red-500 hover:bg-red-600 text-white"
+                            onClick={handleLogoutClick}>
+                        Log out
+                    </Button>
+                ) : (
+                    <>
+                        <LoginModal isLoginOpen={isLoginOpen} setIsLoginOpen={setIsLoginOpen}
+                                    setIsRegisterOpen={setIsRegisterOpen} setIsLogged={setIsLogged}/>
+                        <RegisterModal isRegisterOpen={isRegisterOpen} setIsRegisterOpen={setIsRegisterOpen}
+                                       setIsLoginOpen={setIsLoginOpen}/>
+                    </>
+                )}
+
             </nav>
         </aside>
     )

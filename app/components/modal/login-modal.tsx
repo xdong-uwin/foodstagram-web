@@ -17,7 +17,8 @@ import { Alert, AlertDescription } from "@/components/common/alert";
 export default function LoginModal(props: {
     isLoginOpen: boolean,
     setIsLoginOpen: (arg: boolean) => void,
-    setIsRegisterOpen: (arg: boolean) => void
+    setIsRegisterOpen: (arg: boolean) => void,
+    setIsLogged: (arg: boolean) => void
 }) {
     const [isLoading, setIsLoading] = useState(false)
     const [errorMessage, setErrorMessage] = useState<string | null>(null)
@@ -56,6 +57,7 @@ export default function LoginModal(props: {
         try {
             await postLoginData({email, password})
             props.setIsLoginOpen(false)
+            props.setIsLogged(true)
             // Show a success message?
         } catch (error) {
             if (error instanceof Error) {
