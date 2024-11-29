@@ -58,7 +58,7 @@ export default function LoginModal(props: {
             await postLoginData({email, password})
             props.setIsLoginOpen(false)
             props.setIsLogged(true)
-            // Show a success message?
+
         } catch (error) {
             if (error instanceof Error) {
                 setErrorMessage(error.message)

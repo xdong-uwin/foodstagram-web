@@ -171,6 +171,8 @@ export default function UploadRecipeModal() {
                             <div className="relative mt-2">
                                 <Image
                                     src={imagePreview}
+                                    width={400}
+                                    height={200}
                                     alt="Recipe preview"
                                     className="w-full h-48 object-cover rounded-md"
                                 />
@@ -227,10 +229,9 @@ export default function UploadRecipeModal() {
                                     min="1"
                                     value={ingredient.quantity}
                                     onChange={(e) => updateIngredient(index, 'quantity', e.target.value)}
-                                    placeholder="Quantity"
+                                    placeholder="Gram"
                                     className="w-24"
                                 />
-                                <span className="text-sm text-muted-foreground self-center">Gram</span>
                                 <Button
                                     type="button"
                                     variant="destructive"
