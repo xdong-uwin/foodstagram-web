@@ -3,6 +3,7 @@ import React, {ReactNode, useState} from "react";
 import LoginModal from "@/components/modal/login-modal";
 import RegisterModal from "@/components/modal/resigter-modal";
 import {Button} from "@/components/common/button";
+import CreateRecipeModal from "@/components/modal/create-recipe-modal";
 
 function SidebarItem(props: { value: ReactNode }) {
     return (
@@ -35,7 +36,7 @@ export default function Sidebar() {
 
             <nav className="space-y-7">
                 <SidebarItem value="Favourite"/>
-                <SidebarItem value="Post"/>
+                <CreateRecipeModal />
                 <SidebarItem value="Notification"/>
 
                 {isLogged ? (

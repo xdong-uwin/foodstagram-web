@@ -104,7 +104,7 @@ export default function RegisterModal(props: {
                                    placeholder="Confirm your password" className="border-gray-200 bg-white/50"
                                    required/>
                         </div>
-                        <Button type="submit" className="w-full bg-red-500 hover:bg-red-600 text-white"
+                        <Button type="submit" className="w-full bg-red-500 hover:bg-red-600 text-white justify-center"
                                 disabled={isLoading}>
                             {isLoading ? 'Signing up...' : 'Sign up'}
                         </Button>
