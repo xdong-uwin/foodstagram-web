@@ -4,6 +4,7 @@ import LoginModal from "@/components/modal/login-modal";
 import RegisterModal from "@/components/modal/resigter-modal";
 import {Button} from "@/components/common/button";
 import CreateRecipeModal from "@/components/modal/create-recipe-modal";
+import {isUndefined} from "swr/_internal";
 
 function SidebarItem(props: { value: ReactNode }) {
     return (
@@ -36,10 +37,10 @@ export default function Sidebar() {
 
             <nav className="space-y-7">
                 <SidebarItem value="Favourite"/>
-                <CreateRecipeModal />
+                <CreateRecipeModal/>
                 <SidebarItem value="Notification"/>
 
-                {localStorage.getItem('memberId') ? (
+                {isUndefined(localStorage) || localStorage.getItem('memberId') ? (
                     <Button className="w-full bg-red-500 hover:bg-red-600 text-white justify-center"
                             onClick={handleLogoutClick}>
                         Log out
@@ -47,7 +48,7 @@ export default function Sidebar() {
                 ) : (
                     <>
                         <LoginModal isLoginOpen={isLoginOpen} setIsLoginOpen={setIsLoginOpen}
-                                    setIsRegisterOpen={setIsRegisterOpen} />
+                                    setIsRegisterOpen={setIsRegisterOpen}/>
                         <RegisterModal isRegisterOpen={isRegisterOpen} setIsRegisterOpen={setIsRegisterOpen}
                                        setIsLoginOpen={setIsLoginOpen}/>
                     </>
