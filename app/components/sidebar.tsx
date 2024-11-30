@@ -20,10 +20,10 @@ function SidebarItem(props: { value: ReactNode }) {
 export default function Sidebar() {
     const [isLoginOpen, setIsLoginOpen] = useState(false)
     const [isRegisterOpen, setIsRegisterOpen] = useState(false)
-    const [isLogged, setIsLogged] = useState(false)
 
     const handleLogoutClick = () => {
-        setIsLogged(false)
+        localStorage.removeItem('memberId')
+        window.location.reload()
     }
 
     return (
@@ -39,15 +39,15 @@ export default function Sidebar() {
                 <CreateRecipeModal />
                 <SidebarItem value="Notification"/>
 
-                {isLogged ? (
-                    <Button className="w-full bg-red-500 hover:bg-red-600 text-white"
+                {localStorage.getItem('memberId') ? (
+                    <Button className="w-full bg-red-500 hover:bg-red-600 text-white justify-center"
                             onClick={handleLogoutClick}>
                         Log out
                     </Button>
                 ) : (
                     <>
                         <LoginModal isLoginOpen={isLoginOpen} setIsLoginOpen={setIsLoginOpen}
-                                    setIsRegisterOpen={setIsRegisterOpen} setIsLogged={setIsLogged}/>
+                                    setIsRegisterOpen={setIsRegisterOpen} />
                         <RegisterModal isRegisterOpen={isRegisterOpen} setIsRegisterOpen={setIsRegisterOpen}
                                        setIsLoginOpen={setIsLoginOpen}/>
                     </>

@@ -13,12 +13,12 @@ import {Input} from "@/components/common/input"
 import {Label} from "@/components/common/label"
 import React, {useEffect, useState} from "react";
 import { Alert, AlertDescription } from "@/components/common/alert";
+import {LoginResponse} from "@/types/LoginResponse";
 
 export default function LoginModal(props: {
     isLoginOpen: boolean,
     setIsLoginOpen: (arg: boolean) => void,
     setIsRegisterOpen: (arg: boolean) => void,
-    setIsLogged: (arg: boolean) => void
 }) {
     const [isLoading, setIsLoading] = useState(false)
     const [errorMessage, setErrorMessage] = useState<string | null>(null)
@@ -29,7 +29,7 @@ export default function LoginModal(props: {
         }
     }, [props.isLoginOpen])
 
-    const postLoginData = async (data: { email: string; password: string }) => {
+    const postLoginData = async (data: { email: string; password: string }): Promise<LoginResponse> => {
         const response = await fetch('http://localhost:8080/v1/members/login', {
             method: 'POST',
             headers: {
@@ -55,9 +55,9 @@ export default function LoginModal(props: {
         const password = formData.get('password') as string
 
         try {
-            await postLoginData({email, password})
+            const loginResponse = await postLoginData({email, password})
+            localStorage.setItem('memberId', String(loginResponse.memberId))
             props.setIsLoginOpen(false)
-            props.setIsLogged(true)
 
         } catch (error) {
             if (error instanceof Error) {
