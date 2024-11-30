@@ -49,17 +49,6 @@ const RecipeDescription = React.forwardRef<
 ))
 RecipeDescription.displayName = "RecipeDescription"
 
-const RecipeContent = React.forwardRef<
-    HTMLDivElement,
-    React.HTMLAttributes<HTMLDivElement>
->(({className, ...props}, ref) => (
-    <div ref={ref}
-         className={merge("p-6 pt-0", className)}
-         {...props}
-    />
-))
-RecipeContent.displayName = "RecipeContent"
-
 const RecipeFooter = React.forwardRef<
     HTMLDivElement,
     React.HTMLAttributes<HTMLDivElement>
@@ -72,4 +61,4 @@ const RecipeFooter = React.forwardRef<
 ))
 RecipeFooter.displayName = "RecipeFooter"
 
-export {Recipe, RecipeHeader, RecipeFooter, RecipeTitle, RecipeDescription, RecipeContent}
+export {Recipe, RecipeHeader, RecipeFooter, RecipeTitle, RecipeDescription}

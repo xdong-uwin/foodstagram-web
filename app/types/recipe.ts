@@ -18,4 +18,5 @@ export interface Recipe {
     tags: string[]
     author: string
     imageUrl: string
+    likedBy: number[]
 }
