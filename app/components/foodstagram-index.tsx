@@ -5,7 +5,7 @@ import Sidebar from "@/components/sidebar";
 import SearchBar from "@/components/search-bar";
 import Categories from "@/components/categories";
 import Recipes from "@/components/recipes";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {Recipe} from "@/types/recipe";
 
 type RecipeTag = {
@@ -31,6 +31,10 @@ const fetcher = (...args: [RequestInfo, RequestInit?]): Promise<RecipeTag[]> =>
 
 export default function FoodstagramIndex() {
     const [recipes, setRecipes] = useState<Recipe[]>([]);
+
+    useEffect(() => {
+        fetchRecipes('').then((recipes) => setRecipes(recipes));
+    }, []);
 
     const [searchQuery, setSearchQuery] = useState('')
     const [isLoading, setIsLoading] = useState(false)
@@ -68,7 +72,7 @@ export default function FoodstagramIndex() {
         }
     }
 
-    const { data: recipeTagsResponse } = useSWR('http://localhost:8080/v1/configurations/recipe-tags', fetcher)
+    const {data: recipeTagsResponse} = useSWR('http://localhost:8080/v1/configurations/recipe-tags', fetcher)
     const recipeTags = recipeTagsResponse ? recipeTagsResponse.map(recipeTag => recipeTag.name) : [];
 
     return (
@@ -77,10 +81,11 @@ export default function FoodstagramIndex() {
                 <Sidebar/>
                 <main className="flex-1 p-6">
                     <div className="mb-8">
-                        <SearchBar display={searchQuery} handleInput={handleInput} handleSearch={handleSearch} isLoading={isLoading}/>
-                        <Categories value={recipeTags} handleClick={handleClickCategory} />
+                        <SearchBar display={searchQuery} handleInput={handleInput} handleSearch={handleSearch}
+                                   isLoading={isLoading}/>
+                        <Categories value={recipeTags} handleClick={handleClickCategory}/>
                     </div>
-                    <Recipes recipes={recipes} />
+                    <Recipes recipes={recipes}/>
                     {recipes.length === 0 && !isLoading && (
                         <p className="text-center text-gray-500 mt-6">No recipes found. Try a different search term.</p>
                     )}
