@@ -180,7 +180,7 @@ export default function UploadRecipeModal() {
                                     type="button"
                                     variant="destructive"
                                     size="icon"
-                                    className="absolute top-2 right-2"
+                                    className="absolute top-2 right-2 bg-white justify-center"
                                     onClick={() => setImagePreview(null)}
                                 >
                                     <X className="w-4 h-4" />
