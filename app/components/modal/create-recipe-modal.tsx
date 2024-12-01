@@ -1,8 +1,8 @@
 'use client'
 
-import React, { useState } from "react"
-import { Plus, X, Upload } from 'lucide-react'
-import { Button } from "@/components/common/button"
+import React, {useState} from "react"
+import {Plus, X, Upload} from 'lucide-react'
+import {Button} from "@/components/common/button"
 import {
     Dialog,
     DialogContent,
@@ -11,10 +11,10 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/common/dialog"
-import { Input } from "@/components/common/input"
-import { Label } from "@/components/common/label"
-import { Textarea } from "@/components/common/textarea"
-import { Badge } from "@/components/common/badge"
+import {Input} from "@/components/common/input"
+import {Label} from "@/components/common/label"
+import {Textarea} from "@/components/common/textarea"
+import {Badge} from "@/components/common/badge"
 import Image from "next/image";
 
 interface Ingredient {
@@ -31,8 +31,8 @@ interface Step {
 export default function UploadRecipeModal() {
     const [isOpen, setIsOpen] = useState(false)
     const [imagePreview, setImagePreview] = useState<string | null>(null)
-    const [ingredients, setIngredients] = useState<Ingredient[]>([{ name: '', quantity: '', unit: 'g' }])
-    const [steps, setSteps] = useState<Step[]>([{ order: 1, description: '' }])
+    const [ingredients, setIngredients] = useState<Ingredient[]>([{name: '', quantity: '', unit: 'g'}])
+    const [steps, setSteps] = useState<Step[]>([{order: 1, description: ''}])
     const [tags, setTags] = useState<string[]>([])
     const [newTag, setNewTag] = useState('')
 
@@ -48,7 +48,7 @@ export default function UploadRecipeModal() {
     }
 
     const addIngredient = () => {
-        setIngredients([...ingredients, { name: '', quantity: '', unit: 'g' }])
+        setIngredients([...ingredients, {name: '', quantity: '', unit: 'g'}])
     }
 
     const removeIngredient = (index: number) => {
@@ -57,12 +57,12 @@ export default function UploadRecipeModal() {
 
     const updateIngredient = (index: number, field: keyof Ingredient, value: string) => {
         const newIngredients = [...ingredients]
-        newIngredients[index] = { ...newIngredients[index], [field]: value }
+        newIngredients[index] = {...newIngredients[index], [field]: value}
         setIngredients(newIngredients)
     }
 
     const addStep = () => {
-        setSteps([...steps, { order: steps.length + 1, description: '' }])
+        setSteps([...steps, {order: steps.length + 1, description: ''}])
     }
 
     const removeStep = (index: number) => {
@@ -71,7 +71,7 @@ export default function UploadRecipeModal() {
 
     const updateStep = (index: number, description: string) => {
         const newSteps = [...steps]
-        newSteps[index] = { ...newSteps[index], description }
+        newSteps[index] = {...newSteps[index], description}
         setSteps(newSteps)
     }
 
@@ -114,7 +114,14 @@ export default function UploadRecipeModal() {
     }
 
     return (
-        <Dialog open={isOpen} onOpenChange={setIsOpen}>
+        <Dialog open={isOpen} onOpenChange={
+            (isOpen) => {
+                if (localStorage.getItem('memberId')) {
+                    setIsOpen(isOpen)
+                } else {
+                    alert('Please sign in to post a recipe')
+                }
+            }}>
             <DialogTrigger asChild>
                 <Button className="w-full text-left justify-left">
                     <h2 className="text-xl font-semibold mb-2">
@@ -132,7 +139,7 @@ export default function UploadRecipeModal() {
                 <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="space-y-2">
                         <Label htmlFor="title">Recipe Title</Label>
-                        <Input id="title" name="title" placeholder="Enter recipe title" required />
+                        <Input id="title" name="title" placeholder="Enter recipe title" required/>
                     </div>
 
                     <div className="space-y-2">
@@ -163,7 +170,7 @@ export default function UploadRecipeModal() {
                                 onClick={() => document.getElementById('image')?.click()}
                                 className="w-full"
                             >
-                                <Upload className="w-4 h-4 mr-2" />
+                                <Upload className="w-4 h-4 mr-2"/>
                                 Upload Image
                             </Button>
                         </div>
@@ -183,7 +190,7 @@ export default function UploadRecipeModal() {
                                     className="absolute top-2 right-2 bg-white justify-center"
                                     onClick={() => setImagePreview(null)}
                                 >
-                                    <X className="w-4 h-4" />
+                                    <X className="w-4 h-4"/>
                                 </Button>
                             </div>
                         )}
@@ -200,7 +207,7 @@ export default function UploadRecipeModal() {
                                         onClick={() => removeTag(tag)}
                                         className="ml-2 hover:text-destructive"
                                     >
-                                        <X className="w-3 h-3" />
+                                        <X className="w-3 h-3"/>
                                     </button>
                                 </Badge>
                             ))}
@@ -243,7 +250,7 @@ export default function UploadRecipeModal() {
                             </div>
                         ))}
                         <Button type="button" variant="outline" onClick={addIngredient} className="w-full">
-                            <Plus className="w-4 h-4 mr-2" />
+                            <Plus className="w-4 h-4 mr-2"/>
                             Add Ingredient
                         </Button>
                     </div>
@@ -252,7 +259,8 @@ export default function UploadRecipeModal() {
                         <Label>Steps</Label>
                         {steps.map((step, index) => (
                             <div key={index} className="flex gap-2">
-                                <div className="flex-shrink-0 w-10 h-10 rounded-full text-black flex items-center justify-center">
+                                <div
+                                    className="flex-shrink-0 w-10 h-10 rounded-full text-black flex items-center justify-center">
                                     {step.order}
                                 </div>
                                 <div className="flex-1">
@@ -269,12 +277,12 @@ export default function UploadRecipeModal() {
                                     size="icon"
                                     onClick={() => removeStep(index)}
                                 >
-                                    <X className="w-4 h-4 self-center" />
+                                    <X className="w-4 h-4 self-center"/>
                                 </Button>
                             </div>
                         ))}
                         <Button type="button" variant="outline" onClick={addStep} className="w-full">
-                            <Plus className="w-4 h-4 mr-2" />
+                            <Plus className="w-4 h-4 mr-2"/>
                             Add Step
                         </Button>
                     </div>
