@@ -18,7 +18,7 @@ function SidebarItem(props: { value: ReactNode }) {
     )
 }
 
-export default function Sidebar() {
+export default function Sidebar(props: { handleClickFavourite: (memberId: string) => void }) {
     const [isLoginOpen, setIsLoginOpen] = useState(false)
     const [isRegisterOpen, setIsRegisterOpen] = useState(false)
 
@@ -36,7 +36,20 @@ export default function Sidebar() {
             </Link>
 
             <nav className="space-y-7">
-                <SidebarItem value="Favourite"/>
+                <div>
+                    <Button className="w-full text-left justify-left" onClick={() => {
+                        const memberId = localStorage.getItem('memberId');
+                        if (memberId) {
+                            props.handleClickFavourite(memberId);
+                        } else {
+                            alert("Please sign in to view your favourite recipes");
+                        }
+                    }}>
+                        <h2 className="text-xl font-semibold mb-2">
+                            Favourite
+                        </h2>
+                    </Button>
+                </div>
                 <CreateRecipeModal/>
                 <SidebarItem value="Notification"/>
 

@@ -47,7 +47,7 @@ export default function RecipeContent(
                 }
             }
         } else {
-            alert('Please login to like a recipe');
+            alert('Please sign in to like a recipe');
         }
     }
 

@@ -72,13 +72,26 @@ export default function FoodstagramIndex() {
         }
     }
 
+    const handleClickFavourite = async (memberId: string) => {
+        try {
+            const response = await fetch(`http://localhost:8080/v1/members/${memberId}/favourites`)
+            if (!response.ok) {
+                throw new Error('Failed to fetch favourites')
+            }
+            setRecipes(await response.json())
+        } catch (error) {
+            console.error('Error fetching favourites:', error)
+            return []
+        }
+    }
+
     const {data: recipeTagsResponse} = useSWR('http://localhost:8080/v1/configurations/recipe-tags', fetcher)
     const recipeTags = recipeTagsResponse ? recipeTagsResponse.map(recipeTag => recipeTag.name) : [];
 
     return (
         <div className="min-h-screen bg-gray-50">
             <div className="flex">
-                <Sidebar/>
+                <Sidebar handleClickFavourite={handleClickFavourite}/>
                 <main className="flex-1 p-6">
                     <div className="mb-8">
                         <SearchBar display={searchQuery} handleInput={handleInput} handleSearch={handleSearch}
