@@ -20,7 +20,7 @@ interface Notification {
     title: string
     message: string
     timestamp: string
-    read: boolean
+    isRead: boolean
 }
 
 export default function NotificationsModal() {
@@ -39,7 +39,7 @@ export default function NotificationsModal() {
 
     const [isOpen, setIsOpen] = useState(false)
     const [notifications, setNotifications] = useState<Notification[]>([])
-    const { language } = useLanguage()
+    const {language} = useLanguage()
     const translationText = translations[language]
 
     useEffect(() => {
@@ -49,16 +49,26 @@ export default function NotificationsModal() {
     }, []);
 
     const markAsRead = (id: string) => {
-        setNotifications(notifications.map(notification =>
-            notification.id === id ? {...notification, read: true} : notification
-        ))
+        setNotifications(notifications.map(notification => {
+            try {
+                fetch(`http://localhost:8080/v1/notifications/${id}/read`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                })
+            } catch (error) {
+                console.error('Error marking notification as read:', error)
+            }
+            return notification.id === id ? {...notification, isRead: true} : notification;
+        }))
     }
 
     const deleteNotification = (id: string) => {
         setNotifications(notifications.filter(notification => notification.id !== id))
     }
 
-    const unreadCount = notifications.filter(n => !n.read).length
+    const unreadCount = notifications.filter(n => !n.isRead).length
 
     return (
         <Dialog open={isOpen} onOpenChange={(isOpen) => {
@@ -96,7 +106,7 @@ export default function NotificationsModal() {
                             {notifications.map((notification) => (
                                 <div
                                     key={notification.id}
-                                    className={`p-4 rounded-lg border ${notification.read ? 'bg-background' : 'bg-muted'}`}
+                                    className={`p-4 rounded-lg border ${notification.isRead ? 'bg-background' : 'bg-muted'}`}
                                 >
                                     <div className="flex justify-between items-start">
                                         <div>
@@ -112,7 +122,7 @@ export default function NotificationsModal() {
                                             <X className="h-4 w-4"/>
                                         </Button>
                                     </div>
-                                    {!notification.read && (
+                                    {!notification.isRead && (
                                         <Button
                                             variant="link"
                                             size="sm"
