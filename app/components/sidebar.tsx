@@ -1,5 +1,5 @@
 import Link from "next/link";
-import React, {ReactNode, useState} from "react";
+import React, {useState} from "react";
 import LoginModal from "@/components/modal/login-modal";
 import RegisterModal from "@/components/modal/resigter-modal";
 import {Button} from "@/components/common/button";
@@ -7,18 +7,7 @@ import CreateRecipeModal from "@/components/modal/create-recipe-modal";
 import {isUndefined} from "swr/_internal";
 import {useLanguage} from "@/language/language-context";
 import translations from "@/language/translations";
-
-function SidebarItem(props: { value: ReactNode }) {
-    return (
-        <div>
-            <Button className="w-full text-left justify-left">
-                <h2 className="text-xl font-semibold mb-2">
-                    {props.value}
-                </h2>
-            </Button>
-        </div>
-    )
-}
+import NotificationsModal from "@/components/modal/notification-modal";
 
 export default function Sidebar(props: { handleClickFavourite: (memberId: string) => void }) {
     const [isLoginOpen, setIsLoginOpen] = useState(false)
@@ -55,7 +44,7 @@ export default function Sidebar(props: { handleClickFavourite: (memberId: string
                     </Button>
                 </div>
                 <CreateRecipeModal/>
-                <SidebarItem value="Notification"/>
+                <NotificationsModal/>
 
                 {isUndefined(localStorage) || localStorage.getItem('memberId') ? (
                     <Button className="w-full bg-red-500 hover:bg-red-600 text-white justify-center"
