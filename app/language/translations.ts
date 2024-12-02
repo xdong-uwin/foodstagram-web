@@ -10,6 +10,7 @@ const translations = {
         post: "Post",
         notification: "Notification",
         logout: "Log out",
+        like: "Like",
     },
     fr: {
         uploadRecipe: "Ajouter une Recette",
@@ -22,6 +23,7 @@ const translations = {
         post: "Publier",
         notification: "Notification",
         logout: "Se déconnecter",
+        like: "Aimer",
     }
 }
 

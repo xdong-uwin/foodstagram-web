@@ -4,6 +4,8 @@ import {Button} from "@/components/common/button";
 import {Heart} from "lucide-react";
 import React from "react";
 import {Recipe} from "@/types/recipe";
+import {useLanguage} from "@/language/language-context";
+import translations from "@/language/translations";
 
 export default function RecipeContent(
     props: { recipe: Recipe, setIsDetailModalOpen: (value: boolean) => void },
@@ -12,6 +14,8 @@ export default function RecipeContent(
     const [isLikedByCurrentMember, setIsLikedByCurrentMember] = React.useState(
         !!(localStorage.getItem('memberId') && props.recipe.likedBy.includes(Number(localStorage.getItem('memberId'))))
     );
+    const { language } = useLanguage()
+    const translationText = translations[language]
 
     const handleLike = async () => {
         if (localStorage.getItem('memberId')) {
@@ -75,7 +79,7 @@ export default function RecipeContent(
                     {isLikedByCurrentMember ?
                         <Heart className="w-4 h-4" fill="#ef4444"/> :
                         <Heart className="w-4 h-4"/>}
-                    <span className="ml-1">Like</span>
+                    <span className="ml-1">{translationText.like}</span>
                 </Button>
             </div>
         </div>
