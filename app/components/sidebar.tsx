@@ -23,7 +23,7 @@ export default function Sidebar(props: { handleClickFavourite: (memberId: string
     return (
         <aside className="w-64 p-6 bg-white border-r min-h-screen">
             <Link href="/" className="inline-block mb-8">
-                <div className="bg-red-500 text-white px-11 py-2 rounded-full text-lg font-semibold">
+                <div className="bg-lime-500 text-white px-11 py-2 rounded-full text-lg font-semibold">
                     Foodstagram
                 </div>
             </Link>
@@ -47,7 +47,7 @@ export default function Sidebar(props: { handleClickFavourite: (memberId: string
                 <NotificationsModal/>
 
                 {isUndefined(localStorage) || localStorage.getItem('memberId') ? (
-                    <Button className="w-full bg-red-500 hover:bg-red-600 text-white justify-center"
+                    <Button className="w-full bg-lime-500 hover:bg-lime-600 text-white justify-center"
                             onClick={handleLogoutClick}>
                         {translationText.logout}
                     </Button>

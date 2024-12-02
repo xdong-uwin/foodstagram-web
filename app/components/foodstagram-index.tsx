@@ -28,9 +28,6 @@ const fetchRecipes = async (query: string): Promise<Recipe[]> => {
     }
 }
 
-const fetcher = (...args: [RequestInfo, RequestInit?]): Promise<RecipeTag[]> =>
-    fetch(...args).then((res) => res.json());
-
 export default function FoodstagramIndex() {
     const [recipes, setRecipes] = useState<Recipe[]>([]);
     const { language } = useLanguage()
@@ -89,8 +86,7 @@ export default function FoodstagramIndex() {
         }
     }
 
-    const {data: recipeTagsResponse} = useSWR('http://localhost:8080/v1/configurations/recipe-tags', fetcher)
-    const recipeTags = recipeTagsResponse ? recipeTagsResponse.map(recipeTag => recipeTag.name) : [];
+    const recipeTags = translationText.recipeTags
 
     return (
         <div className="min-h-screen bg-gray-50">

@@ -73,11 +73,11 @@ export default function RecipeContent(
                 <Button
                     variant="ghost"
                     size="sm"
-                    className="text-red-500 hover:text-red-600 hover:bg-red-50"
+                    className="text-lime-500 hover:text-lime-600 hover:bg-lime-50"
                     onClick={handleLike}
                 >
                     {isLikedByCurrentMember ?
-                        <Heart className="w-4 h-4" fill="#ef4444"/> :
+                        <Heart className="w-4 h-4" fill="#84cc16"/> :
                         <Heart className="w-4 h-4"/>}
                     <span className="ml-1">{translationText.like}</span>
                 </Button>

@@ -11,6 +11,7 @@ const translations = {
         notification: "Notification",
         logout: "Log out",
         like: "Like",
+        recipeTags: ["low-fat", "high-protein", "low-carb", "rich in vitamins", "gluten-free", "dairy-free", "vegetarian", "vegan"]
     },
     fr: {
         uploadRecipe: "Ajouter une Recette",
@@ -24,6 +25,7 @@ const translations = {
         notification: "Notification",
         logout: "Se déconnecter",
         like: "Aimer",
+        recipeTags: ["faible en gras", "riche en protéines", "faible en glucides", "riche en vitamines", "sans gluten", "sans produits laitiers", "végétarien", "végétalien"]
     }
 }
 

@@ -75,7 +75,7 @@ export default function NotificationsModal() {
                     </h2>
                     {unreadCount > 0 && (
                         <span
-                            className="bg-[#F05454] text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center ml-4 mb-2">
+                            className="bg-[#84cc16] text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center ml-4 mb-2">
                             {unreadCount}
                         </span>
                     )}

@@ -84,7 +84,7 @@ export default function LoginModal(props: {
     return (
         <Dialog open={props.isLoginOpen} onOpenChange={props.setIsLoginOpen}>
             <DialogTrigger asChild>
-                <Button className="w-full bg-red-500 hover:bg-red-600 text-white justify-center">
+                <Button className="w-full bg-lime-500 hover:bg-lime-600 text-white justify-center">
                     {translationText.signIn}
                 </Button>
             </DialogTrigger>
@@ -113,14 +113,14 @@ export default function LoginModal(props: {
                         <Input id="password" name="password" type="password" placeholder="Enter your password"
                                className="border-gray-200" required/>
                     </div>
-                    <Button type="submit" className="w-full bg-red-500 hover:bg-red-600 text-white justify-center"
+                    <Button type="submit" className="w-full bg-lime-500 hover:bg-lime-600 text-white justify-center"
                             disabled={isLoading}>
                         {isLoading ? 'Signing in...' : 'Sign in'}
                     </Button>
 
                     <p className="text-center text-sm text-muted-foreground">
                         Don&apos;t have an account?{" "}
-                        <button type="button" onClick={handleSignOnClick} className="text-red-500 hover:underline">
+                        <button type="button" onClick={handleSignOnClick} className="text-lime-500 hover:underline">
                             Sign up
                         </button>
                     </p>

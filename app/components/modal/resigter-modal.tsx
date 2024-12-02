@@ -69,7 +69,7 @@ export default function RegisterModal(props: {
         <>
             <Dialog open={props.isRegisterOpen} onOpenChange={props.setIsRegisterOpen}>
                 <DialogTrigger asChild>
-                    <Button className="w-full bg-red-500 hover:bg-red-600 text-white justify-center">
+                    <Button className="w-full bg-lime-500 hover:bg-lime-600 text-white justify-center">
                         {translationText.becomeAMember}
                     </Button>
                 </DialogTrigger>
@@ -108,14 +108,14 @@ export default function RegisterModal(props: {
                                    placeholder="Confirm your password" className="border-gray-200 bg-white/50"
                                    required/>
                         </div>
-                        <Button type="submit" className="w-full bg-red-500 hover:bg-red-600 text-white justify-center"
+                        <Button type="submit" className="w-full bg-lime-500 hover:bg-lime-600 text-white justify-center"
                                 disabled={isLoading}>
                             {isLoading ? 'Signing up...' : 'Sign up'}
                         </Button>
 
                         <p className="text-center text-sm text-muted-foreground">
                             Already have an account?{" "}
-                            <button type="button" onClick={handleLoginClick} className="text-red-500 hover:underline">
+                            <button type="button" onClick={handleLoginClick} className="text-lime-500 hover:underline">
                                 Sign in
                             </button>
                         </p>

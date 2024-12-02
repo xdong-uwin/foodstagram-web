@@ -17,7 +17,7 @@ export default function SearchBar(props: { handleSearch: () => void , handleInpu
                 onChange={(e) => props.handleInput(e.target.value)}
             />
             <Button
-                className="bg-red-500 hover:bg-red-600 text-white rounded-full"
+                className="bg-lime-500 hover:bg-lime-600 text-white rounded-full"
                 disabled={props.isLoading}
                 onClick={props.handleSearch}
             >
