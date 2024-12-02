@@ -7,6 +7,8 @@ import Categories from "@/components/categories";
 import Recipes from "@/components/recipes";
 import {useEffect, useState} from "react";
 import {Recipe} from "@/types/recipe";
+import {useLanguage} from "@/language/language-context";
+import translations from "@/language/translations";
 
 type RecipeTag = {
     name: string;
@@ -31,6 +33,8 @@ const fetcher = (...args: [RequestInfo, RequestInit?]): Promise<RecipeTag[]> =>
 
 export default function FoodstagramIndex() {
     const [recipes, setRecipes] = useState<Recipe[]>([]);
+    const { language } = useLanguage()
+    const translationText = translations[language]
 
     useEffect(() => {
         fetchRecipes('').then((recipes) => setRecipes(recipes));

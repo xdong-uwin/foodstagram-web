@@ -14,6 +14,8 @@ import {Label} from "@/components/common/label"
 import React, {useEffect, useState} from "react";
 import { Alert, AlertDescription } from "@/components/common/alert";
 import {LoginResponse} from "@/types/LoginResponse";
+import {useLanguage} from "@/language/language-context";
+import translations from "@/language/translations";
 
 export default function LoginModal(props: {
     isLoginOpen: boolean,
@@ -22,6 +24,8 @@ export default function LoginModal(props: {
 }) {
     const [isLoading, setIsLoading] = useState(false)
     const [errorMessage, setErrorMessage] = useState<string | null>(null)
+    const { language } = useLanguage()
+    const translationText = translations[language]
 
     useEffect(() => {
         if (props.isLoginOpen) {
@@ -81,7 +85,7 @@ export default function LoginModal(props: {
         <Dialog open={props.isLoginOpen} onOpenChange={props.setIsLoginOpen}>
             <DialogTrigger asChild>
                 <Button className="w-full bg-red-500 hover:bg-red-600 text-white justify-center">
-                    Sign in
+                    {translationText.signIn}
                 </Button>
             </DialogTrigger>
 

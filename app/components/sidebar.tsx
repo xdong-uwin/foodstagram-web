@@ -5,6 +5,8 @@ import RegisterModal from "@/components/modal/resigter-modal";
 import {Button} from "@/components/common/button";
 import CreateRecipeModal from "@/components/modal/create-recipe-modal";
 import {isUndefined} from "swr/_internal";
+import {useLanguage} from "@/language/language-context";
+import translations from "@/language/translations";
 
 function SidebarItem(props: { value: ReactNode }) {
     return (
@@ -21,6 +23,8 @@ function SidebarItem(props: { value: ReactNode }) {
 export default function Sidebar(props: { handleClickFavourite: (memberId: string) => void }) {
     const [isLoginOpen, setIsLoginOpen] = useState(false)
     const [isRegisterOpen, setIsRegisterOpen] = useState(false)
+    const { language } = useLanguage()
+    const translationText = translations[language]
 
     const handleLogoutClick = () => {
         localStorage.removeItem('memberId')
@@ -46,7 +50,7 @@ export default function Sidebar(props: { handleClickFavourite: (memberId: string
                         }
                     }}>
                         <h2 className="text-xl font-semibold mb-2">
-                            Favourite
+                            {translationText.favourite}
                         </h2>
                     </Button>
                 </div>
@@ -56,7 +60,7 @@ export default function Sidebar(props: { handleClickFavourite: (memberId: string
                 {isUndefined(localStorage) || localStorage.getItem('memberId') ? (
                     <Button className="w-full bg-red-500 hover:bg-red-600 text-white justify-center"
                             onClick={handleLogoutClick}>
-                        Log out
+                        {translationText.logout}
                     </Button>
                 ) : (
                     <>

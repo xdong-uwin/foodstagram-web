@@ -12,6 +12,8 @@ import {
 } from "@/components/common/dialog"
 import { Input } from "@/components/common/input"
 import { Label } from "@/components/common/label"
+import translations from "@/language/translations";
+import {useLanguage} from "@/language/language-context";
 
 export default function RegisterModal(props: {
     isRegisterOpen: boolean,
@@ -19,6 +21,8 @@ export default function RegisterModal(props: {
     setIsLoginOpen: (arg: boolean) => void
 }) {
     const [isLoading, setIsLoading] = useState(false)
+    const { language } = useLanguage()
+    const translationText = translations[language]
 
     const postRegisterData = async (data: { name: string; email: string; password: string }) => {
         const response = await fetch('http://localhost:8080/v1/members', {
@@ -66,7 +70,7 @@ export default function RegisterModal(props: {
             <Dialog open={props.isRegisterOpen} onOpenChange={props.setIsRegisterOpen}>
                 <DialogTrigger asChild>
                     <Button className="w-full bg-red-500 hover:bg-red-600 text-white justify-center">
-                        Become a member
+                        {translationText.becomeAMember}
                     </Button>
                 </DialogTrigger>
 

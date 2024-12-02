@@ -16,6 +16,8 @@ import {Label} from "@/components/common/label"
 import {Textarea} from "@/components/common/textarea"
 import {Badge} from "@/components/common/badge"
 import Image from "next/image";
+import {useLanguage} from "@/language/language-context";
+import translations from "@/language/translations";
 
 interface Ingredient {
     name: string
@@ -35,6 +37,8 @@ export default function UploadRecipeModal() {
     const [steps, setSteps] = useState<Step[]>([{order: 1, description: ''}])
     const [tags, setTags] = useState<string[]>([])
     const [newTag, setNewTag] = useState('')
+    const { language } = useLanguage()
+    const translationText = translations[language]
 
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0]
@@ -125,7 +129,7 @@ export default function UploadRecipeModal() {
             <DialogTrigger asChild>
                 <Button className="w-full text-left justify-left">
                     <h2 className="text-xl font-semibold mb-2">
-                        Post
+                        {translationText.post}
                     </h2>
                 </Button>
             </DialogTrigger>
