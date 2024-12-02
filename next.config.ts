@@ -12,6 +12,10 @@ module.exports = {
                 protocol: 'https',
                 hostname: 'www.dropbox.com'
             },
+            {
+                protocol: 'https',
+                hostname: 'food-guide.canada.ca'
+            }
         ],
     },
 }
