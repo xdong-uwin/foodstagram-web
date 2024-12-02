@@ -1,5 +1,4 @@
 "use client"
-import useSWR from 'swr'
 
 import Sidebar from "@/components/sidebar";
 import SearchBar from "@/components/search-bar";
@@ -10,9 +9,6 @@ import {Recipe} from "@/types/recipe";
 import {useLanguage} from "@/language/language-context";
 import translations from "@/language/translations";
 
-type RecipeTag = {
-    name: string;
-};
 
 const fetchRecipes = async (query: string): Promise<Recipe[]> => {
     try {
@@ -89,10 +85,10 @@ export default function FoodstagramIndex() {
     const recipeTags = translationText.recipeTags
 
     return (
-        <div className="min-h-screen bg-gray-50">
+        <div className="bg-gray-50 h-screen overflow-hidden">
             <div className="flex">
                 <Sidebar handleClickFavourite={handleClickFavourite}/>
-                <main className="flex-1 p-6">
+                <main className="flex-1 p-6 h-screen overflow-y-auto">
                     <div className="mb-8">
                         <SearchBar display={searchQuery} handleInput={handleInput} handleSearch={handleSearch}
                                    isLoading={isLoading}/>
