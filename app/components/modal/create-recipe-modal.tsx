@@ -295,7 +295,7 @@ export default function UploadRecipeModal() {
                         <Button type="button" variant="outline" onClick={() => setIsOpen(false)}>
                             Cancel
                         </Button>
-                        <Button type="submit" className="bg-[#F05454] hover:bg-[#E04444] text-white">
+                        <Button type="submit" className="bg-lime-500 hover:bg-lime-600 text-white">
                             Upload Recipe
                         </Button>
                     </div>
